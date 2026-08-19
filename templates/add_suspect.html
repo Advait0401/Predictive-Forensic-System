@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title"><i class="fas fa-user-plus"></i> Register New Suspect</h2>
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-user-secret"></i> Suspect Details
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label><i class="fas fa-user"></i> Suspect Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Enter full name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label><i class="fas fa-info-circle"></i> Description</label>
+                        <textarea name="desc" class="form-control" rows="4" placeholder="Physical description, age, distinguishing marks..." required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-custom">
+                            <i class="fas fa-save"></i> Register Suspect
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

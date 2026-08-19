@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title"><i class="fas fa-users-cog"></i> Manage Users</h2>
+
+<!-- Add User Form -->
+<div class="card mb-4">
+    <div class="card-header bg-primary">
+        <i class="fas fa-user-plus"></i> Add New User
+    </div>
+    <div class="card-body">
+        <form method="POST" action="/add_user" class="row">
+            <div class="col-md-3">
+                <input type="text" name="username" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="col-md-3">
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="col-md-3">
+                <select name="role" class="form-control">
+                    <option value="user">User (View Only)</option>
+                    <option value="admin">Admin (Full Access)</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-plus"></i> Add User
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Users Table -->
+<div class="card">
+    <div class="card-header bg-secondary">
+        <i class="fas fa-users"></i> All Users
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-id-card"></i> ID</th>
+                        <th><i class="fas fa-user"></i> Username</th>
+                        <th><i class="fas fa-user-tag"></i> Role</th>
+                        <th><i class="fas fa-cog"></i> Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td><strong>{{ user.username }}</strong></td>
+                        <td>
+                            {% if user.role == 'admin' %}
+                                <span class="badge bg-danger"><i class="fas fa-shield-alt"></i> Admin</span>
+                            {% else %}
+                                <span class="badge bg-info"><i class="fas fa-user"></i> User</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.username != 'admin' %}
+                            <a href="/delete_user/{{ user.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete user?');">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            {% else %}
+                            <span class="text-muted"><i class="fas fa-lock"></i> Protected</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title"><i class="fas fa-chart-line"></i> ML Analysis & Visualizations</h2>
+
+<!-- Prediction Card -->
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-success">
+                <i class="fas fa-robot"></i> Machine Learning Prediction
+            </div>
+            <div class="card-body text-center">
+                <h5>Decision Tree Prediction</h5>
+                <p class="text-muted">Based on historical crime data analysis:</p>
+                <div class="alert alert-success">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Predicted Crime for Downtown on Friday:</h3>
+                    <h1 class="text-primary">{{ prediction }}</h1>
+                </div>
+                <p class="text-muted"><small><i class="fas fa-info-circle"></i> The Decision Tree algorithm analyzes patterns in location and day of week to predict future crimes.</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row 1 -->
+<div class="row mt-4">
+    <div class="col-lg-6">
+        <div class="card mb-4">
+            <div class="card-header bg-primary">
+                <i class="fas fa-chart-bar"></i> Crime Types Frequency
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename='plots/barchart.png') }}" class="img-fluid" style="max-height: 300px;">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card mb-4">
+            <div class="card-header bg-danger">
+                <i class="fas fa-map-marker-alt"></i> Crime Hotspots (K-Means Clustering)
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename='plots/cluster.png') }}" class="img-fluid" style="max-height: 300px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row 2 -->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card mb-4">
+            <div class="card-header bg-warning">
+                <i class="fas fa-chart-line"></i> Crime Trend Over Time
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename='plots/timeline.png') }}" class="img-fluid" style="max-height: 300px;">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card mb-4">
+            <div class="card-header bg-info">
+                <i class="fas fa-th"></i> Crime Heatmap (Type vs Location)
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename='plots/heatmap.png') }}" class="img-fluid" style="max-height: 300px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pie Chart -->
+<div class="row">
+    <div class="col-lg-6 offset-lg-3">
+        <div class="card mb-4">
+            <div class="card-header bg-secondary">
+                <i class="fas fa-chart-pie"></i> Crimes by Time of Day
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename='plots/piechart.png') }}" class="img-fluid" style="max-height: 350px;">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

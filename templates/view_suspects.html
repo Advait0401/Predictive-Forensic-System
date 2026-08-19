@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title"><i class="fas fa-users"></i> All Suspects</h2>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-user-secret"></i> Suspect Records
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-id-card"></i> ID</th>
+                        <th><i class="fas fa-user"></i> Name</th>
+                        <th><i class="fas fa-info-circle"></i> Description</th>
+                        <th><i class="fas fa-link"></i> Linked Crimes</th>
+                        {% if session.role == 'admin' %}
+                        <th><i class="fas fa-cog"></i> Action</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for suspect in suspects %}
+                    <tr>
+                        <td><strong>{{ suspect.id }}</strong></td>
+                        <td><span class="badge bg-info">{{ suspect.name }}</span></td>
+                        <td>{{ suspect.description }}</td>
+                        <td>
+                            {% if suspect.crimes %}
+                                {% for crime in suspect.crimes %}
+                                    <span class="badge bg-warning text-dark">{{ crime.case_id }}</span>
+                                {% endfor %}
+                            {% else %}
+                                <span class="text-muted">No crimes linked</span>
+                            {% endif %}
+                        </td>
+                        {% if session.role == 'admin' %}
+                        <td>
+                            <a href="/delete_suspect/{{ suspect.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete suspect?');">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
